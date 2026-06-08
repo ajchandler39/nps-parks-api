@@ -27,7 +27,7 @@ public class NpsDataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         logger.info(LOAD_MSG);
         List<ParkDto> parks = npsApiService.fetchAllParks();
-        System.out.println(RETRIEVE_SUCCESS_MSG + parks.size());
+        logger.info(RETRIEVE_SUCCESS_MSG, parks.size());
         parkService.saveAll(parks);
         logger.info(SAVE_SUCCESS_MSG);
     }

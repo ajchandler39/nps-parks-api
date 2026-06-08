@@ -9,8 +9,10 @@ import com.example.demo.entity.Topic;
 import com.example.demo.repository.ActivityRepository;
 import com.example.demo.repository.ParkRepository;
 import com.example.demo.repository.TopicRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -129,7 +131,7 @@ public class ParkService {
 
     public Park findByParkCode(String parkCode) {
         return parkRepository.findByParkCode(parkCode)
-                .orElseThrow(() -> new RuntimeException(PARK_NOT_FOUND_PREFIX + parkCode));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PARK_NOT_FOUND_PREFIX + parkCode));
     }
 
     public List<Park> findByState(String state) {
